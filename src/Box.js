@@ -6,8 +6,11 @@ import './Box.css';
 
 class Box extends Component {
   render() {
+    let bgColor = {
+      background: this.props.color
+    }
     return (
-        <div className="Box">{ this.props.color }</div>
+        <div className="Box" style={bgColor}>{ this.props.color }</div>
     )
   }
 }
