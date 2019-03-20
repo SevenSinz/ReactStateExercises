@@ -15,10 +15,16 @@ class Board extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-        boxes:  Array.from({ length: props.numBoxes })
-                .map(n => this.randColor()) };
+        boxes: this.getRandomColors()  
+      };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  // returns array of 16 random colors
+  getRandomColors() {
+    return Array.from({ length: this.props.numBoxes })
+           .map(n => this.randColor())
   }
 
   /** generate a random number */
@@ -32,29 +38,20 @@ class Board extends Component {
    return colors[idx];
   }
 
-
-// Currently unused.
-//   boardGen() {
-//     this.setState(curState => ({
-//       boxes: curState.boxes.map(n => this.randColor())
-//     }));
-//   }
-
   // Choose a random box whose color to change.
   randBox() {
-    let idx = this.randNum(this.state.boxes.length);
-    let copy = [...this.state.boxes];
-    copy[idx] = this.randColor();
-    this.setState({boxes: copy});}
 
-// Currenlty unusewd
-//   this.setState(st => ({
-//     boxes: st.boxes.map(boxes => ({
-//         boxes[idx] === [idx]
-//           ? { ...boxes, done: true }
-//           : boxes
-//     })
-//   });
+    let idxToChange = this.randNum(this.state.boxes.length);
+
+    this.setState(st => ({
+      boxes: st.boxes.map((b, idx) => (idx === idxToChange) ? this.randColor() : b )
+    }))
+
+
+    // let copy = [...this.state.boxes];
+    // copy[idx] = this.randColor();
+    // this.setState({boxes: copy})
+  }
 
   handleClick(evt) {
     this.randBox();
