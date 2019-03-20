@@ -47,10 +47,13 @@ class Board extends Component {
       boxes: st.boxes.map((b, idx) => (idx === idxToChange) ? this.randColor() : b )
     }))
 
-
-    // let copy = [...this.state.boxes];
-    // copy[idx] = this.randColor();
-    // this.setState({boxes: copy})
+    // // to solve in another way!
+    // this.setState(st => { 
+    //   let copy = [...this.state.boxes];
+    //   copy[idxToChange] = this.randColor();
+      
+    //   return {boxes: copy}
+    // })
   }
 
   handleClick(evt) {
